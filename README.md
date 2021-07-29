@@ -5,85 +5,85 @@ This is all about fundamentals of implementing regular expression
 ## Basic set
 
 ### any single character (including spaces) is acceptable between foo & bar
-**`.` (wildcard) represents single character**
+> `.` (wildcard) represents single character
 ```js
 /foo.bar/
 ```
 
 ### any number of characters (including spaces) are acceptable between foo & bar
-**`.*` represents any number of characters**
+> `.*` represents any number of characters
 ```js
 /foo.*bar/
 ```
 
 ### any number of spaces are acceptable between foo & bar
-**`\s` represents white space, `*` represents any number of characters**
+> `\s` represents white space, `*` represents any number of characters
 ```js
 /foo\s*bar/
 ```
 
 ### only _f, c, l_ are accepted as char followed by _oo_
-**`[abc]` represents character class -> inclusion list**
+> `[abc]` represents character class -> inclusion list
 ```js
 /[fcl]oo/
 ```
 
 ### only char except _f, c, l_ are accepted as char followed by _oo_
-**`[^abc]` represents except character class -> exclusion list**
+> `[^abc]` represents except character class -> exclusion list
 ```js
 /[^fcl]oo/
 ```
 
-### charater in range _a to c_ are accepted as char followed by `oo`
-**`[a-c]` represents character class range -> inclusion list**
+### charater in range _a to c_ are accepted as char followed by _oo_
+> `[a-c]` represents character class range -> inclusion list
 ```js
 /[a-c]oo/
 ```
 
-### charater in range `a to c` or `y` or `z` are accepted as char followed by `oo`
-**`[a-c]` represents character class range -> inclusion list**
+### charater in range _a to c_ or _y_ or _z_ are accepted as char followed by _oo_
+> `[a-c]` represents character class range -> inclusion list
 ```js
 /[a-cyz]oo/
 ```
 
-### charater in range `a to c` or `A-C` or `y` or `z` are accepted as char followed by `oo`
-**`[a-c]` represents character class range -> inclusion list**
+### charater in range _a to c_ or _A-C_ or _y_ or _z_ are accepted as char followed by _oo_
+> `[a-c]` represents character class range -> inclusion list
 ```js
 /[a-cA-Cyz]oo/
 ```
 
-### charater outside range `a to c` are accepted as char followed by `oo`
-**`[a-c]` represents character outside class range -> exclusion list**
+### charater outside range _a to c_ are accepted as char followed by _oo_
+> `[a-c]` represents character outside class range -> exclusion list
 ```js
 /[^a-c]oo/
 ```
 
 ### character with multiple x followed by a period and again followed by multiple y
-**escaping with backslash**
+> escaping with backslash
 ```js
 /x*\.y*/
 ```
 
 ### string with x followed by any of `.`, `#`, `*` followed by y are acceptable
-**if a period is inside char class, no need to use backslash**
+> if a period is inside char class, no need to use backslash
 ```js
 /x[.#*]y/
 ```
 
 ### string with x followed by any of ^.#*\ followed by y are acceptable
-**since `^` or `\` inside char class has different meaning we need to use backslash to exclude**
+> since `^` or `\` inside char class has different meaning we need to use backslash to exclude
 ```js
 /x[.#*\^\\]y/
 ```
 
 ### string that starts with foo are acceptable
-**`^` represents beginning fo a line**
+> `^` represents beginning fo a line
 ```js
 /^foo.*/
 ```
 
 ### string that ends with bar are acceptable
-**`$` represents end of a line**
+> `$` represents end of a line
 ```js
 /.*bar$/
 ```
@@ -95,7 +95,7 @@ This is all about fundamentals of implementing regular expression
 
 ---
 
-## Extended set ##
+## Extended set
 
 ### curly brace repeater - identify a 3 digit number
 ```js
@@ -113,26 +113,26 @@ This is all about fundamentals of implementing regular expression
 ```
 
 ### accept string that contains 4 or less repeatations of _ha_
-**`^` and `$` are used so that regex don't break the string and treat it as whole**
+> `^` and `$` are used so that regex don't break the string and treat it as whole
 ```js
 /^(ha){1,4}$/
 ```
 
 ### accept string that contains any repetation of _a_ inside _foo and bar_, no _zero occurances_
-**`a+` considers 1 or more occurances of a, while `a*` considers 0 or more repetations**
+> `a+` considers 1 or more occurances of a, while `a*` considers 0 or more repetations
 ```js
 /fooa+bar/
 ```
 
-### in a web address _only 0 or 1 occurances_ of `s` is applicable for `http://` or `https://`
-**`?` checks only 1 or 0 occurances of preceeding char**
+### in a web address _only 0 or 1 occurances_ of _s_ is applicable for _http://_ or _https://_
+> `?` checks only 1 or 0 occurances of preceeding char
 ```js
 /https?\/\//
 new RegExp(`https?//`)
 ```
 
 ### accepts if log or ply is followed by wood
-**pipe symbol `|` resembles _or operator_**
+> pipe symbol `|` resembles _or operator_
 ```js
 /(log|ply)wood/
 ```
@@ -145,7 +145,7 @@ new RegExp(`https?//`)
 > anything wrapped by capture group will be available in the array value
 
 ### replacing a pattern
-**`g` will search for every match, if absent only first match is considered**
+> `g` will search for every match, if absent only first match is considered
 > **input string:** 'I have 1024x720 & 123x456 monitor'
 > **expected output:** "I have '1024px by 720px' & '123px by 456px' monitor"
 ```js
@@ -191,8 +191,8 @@ re.exec(input)
 ```
 
 ### formatting a date
-**input string:** "Jan 30th 1982" / "Jan 5th 1982"
-**expected output:** "30-Jan-82" / "Jan 5th 1982"
+> **input string:** "Jan 30th 1982" / "Jan 5th 1982"
+> **expected output:** "30-Jan-82" / "Jan 5th 1982"
 ```js
 re = /([a-zA-Z]{3})\s([1-2]?[0-9]|3?[0-1])[a-z]{2}\s[0-9]{2}([0-9]{2})/
 input.replace(re, (...args) => `${args[2]}-${args[1]}-${args[3]}`)
